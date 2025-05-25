@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>htmlhtmlhtmlhtmlhtml</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background-color: black;
+      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    section.questions {
+      margin: 0 auto;
+      max-width: 1540px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding-top: 20px;
+    }
+
+    .questions__row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    fieldset {
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      width: 500px;
+    }
+
+    legend {
+      font-weight: 700;
+      background-color: yellow;
+      color: black;
+      font-size: 24px;
+      padding: 0 15px;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 18px;
+      color: cyan;
+      letter-spacing: 0.5px;
+    }
+
+    pre code {
+      font-size: 16px;
+      color: lime;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    ul, li {
+      color: hotpink;
+      list-style-type: none;
+    }
+  </style>
+</head>
+<body>
+  <section class="questions">
+    <div class="questions__row row1">
+      <fieldset class="question">
+        <legend>Как сравниваются объекты в JavaScript?</legend>
+        <p>Объекты сравниваются по ссылке, а не по содержимому. сравниваются по тому на что они ссылаются</p>
+        <pre><code>
+let obj1 = { a: 1 };
+let obj2 = { a: 1 };
+
+console.log(obj1 === obj2); // false, потому что это два разных объекта в памяти
+
+let obj3 = obj1;
+console.log(obj1 === obj3); // true, потому что обе переменные ссылаются на один и тот же объект
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что делает оператор typeof? Приведи примеры.</legend>
+        <p>Оператор typeof возвращает тип значения в виде строки.</p>
+        <pre><code>
+typeof 123          // "number"
+typeof "hello"      // "string"
+typeof true         // "boolean"
+typeof undefined    // "undefined"
+typeof null         // "object" историческая ошибка
+typeof {}           // "object"
+typeof []           // "object"
+typeof function(){} // "function"
+    </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чем отличаются == и ===? Приведи пример.</legend>
+        <ul>
+          <li>== — нестрогое сравнение: приводит типы перед сравнением;</li>
+          <li>=== — строгое сравнение: не приводит типы</li>
+        </ul>
+        <pre><code>
+0 == false        // true
+0 === false       // false
+
+"5" == 5          // true
+"5" === 5         // false
+
+null == undefined // true
+null === undefined // false
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что такое NaN и почему оно особенное? Как проверить, что значение — это именно NaN?</legend>
+        <p>NaN — это результат математической операции, которая не даёт число (Not-a-Number). Особенность: NaN !== NaN — оно не равно даже самому себе.</p>
+        <br>
+        <pre><code>Number.isNaN(value)  // true, если value — NaN</code></pre>
+        <br>
+        <p>isNaN(value) — работает иначе, иногда путает, потому что сначала пытается привести к числу.</p>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что делает break и continue в цикле? Кратко и по существу.</legend>
+        <ul>
+          <li>* **break** — полностью прерывает цикл и выходит из него.</li>
+          <li>* **continue** — пропускает текущую итерацию и переходит к следующей.</li>
+        </ul>
+        <br>
+        <pre><code>for (let i = 0; i < 5; i++) {
+  if (i === 2) continue; // пропустит 2
+  if (i === 4) break;    // остановит на 4
+  console.log(i);        // выведет 0, 1, 3
+}</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        legend
+      </fieldset>
+    </div>
+    <div class="questions__row row2">
+      <fieldset>
+        <legend>Что такое логические операторы &&, ||, и как они работают с любыми типами данных?</legend>
+        <p>&& === and, || === or</p>
+        <ul>
+          <li>&& (и) — возвращает первое ложное значение или последнее истинное</li>
+          <li>|| (или) — возвращает первое истинное значение</li>
+        </ul>
+        <pre><code>
+true && true && "ok";  // → "ok" (всё true, вернёт последнее)
+
+true && 0 && "ok"; // → 0 (первое ложное)
+
+"hello" && 123 && null;  // → null (null — первое ложное)
+
+
+false || 0 || "yes";  // → "yes" (первое true-значение)
+
+null || undefined || 5; // → 5
+
+0 || "" || NaN;  // → NaN (всё ложное — вернёт последнее)
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что делает оператор ! (логическое "НЕ") и как работает двойное !!?</legend>
+        <p>!value — превращает значение в true или false, инвертируя его логическое значение.</p>
+        <br>
+        <p>!!value — просто приводит значение к логическому типу (Boolean), без инверсии. !! часто используют, чтобы проверить, является ли значение "существующим"</p>
+        <pre><code>
+!true        // false
+!0           // true
+!"hello"     // false
+!!"hello"    // true
+!!null       // false
+!!123        // true
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чем отличается оператор ?? (nullish coalescing) от оператора ||?</legend>
+        <ul>
+          <li>?? возвращает правый операнд, только если левый null или undefined.</li>
+          <li>|| возвращает правый операнд, если левый — любое ложное значение (0, "", false, null, undefined, NaN).</li>
+        </ul>
+        <pre><code>
+0 || "default"   // "default"
+0 ?? "default"   // 0
+
+null || "default"  // "default"
+null ?? "default"  // "default"
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Hoisting(поднятие)</legend>
+        <p>var — поднимается с объявлением, но без значения:</p>
+        <pre><code>console.log(a); // undefined
+var a = 5;</code></pre>
+        <p>Работает так:</p>
+        <pre><code>var a;
+console.log(a); // undefined
+a = 5;</code></pre>
+        <br>
+        <p>let и const — тоже поднимаются, но вызывают ReferenceError</p>
+        <pre><code>console.log(value2);
+let value2 = 10;  // ReferenceError: Cannot access 'value2' before initialization</code></pre>
+        <p>Движок уже знает про b, но ты не можешь её использовать до строки инициализации.</p>
+        <br>
+        <p>Function Declaration — поднимается полностью:</p>
+        <pre><code>sayHi(); // работает
+
+function sayHi() {
+  console.log("Привет");
+}</code></pre>
+        <br>
+        <p>Function Expression (в том числе стрелочная) — не поднимается как функция:</p>
+        <pre><code>sayHi(); // TypeError: sayHi is not a function
+
+const sayHi = function () {
+  console.log("Привет");
+}</code></pre>
+      </fieldset>
+    </div>
+    <div class="questions__row row3">
+      <fieldset class="question">
+        <legend>Расскажи про циклы while и for. В чём их основные отличия и для чего их обычно применяют?</legend>
+        <p>while — выполняет тело цикла, пока условие истинно.</p>
+        <pre><code>
+let i = 0;
+while (i < 3) {
+  console.log(i);
+  i++;
+}</code></pre>
+        <br>
+        <p>for — цикл с объявлением переменной, условием и шагом. Обычно удобен, когда известно число итераций.</p>
+        <pre><code>
+for (let i = 0; i < 3; i++) {
+  console.log(i);
+}
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Для чего используется switch? Как работает default?</legend>
+        <p>switch — заменяет множественные if...else if для проверки значения на строгое равенство с разными вариантами (case).</p>
+        <pre><code>switch (value) {
+  case 1:
+    console.log("one");
+    break;
+  case 2:
+    console.log("two");
+    break;
+  default:
+    console.log("other");
+}</code></pre>
+        <br>
+        <p>default — код, который выполняется, если ни один case не подошёл.</p>
+        <br>
+        <p>break — нужен, чтобы выйти из switch и не выполнять следующие case.</p>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что такое function expression? Как она отличается от function declaration?</legend>
+        <p>Function Declaration (Объявление функции)</p>
+        <ul>
+          <li>Объявляется с помощью ключевого слова function и имени.</li>
+          <li>Поднимается (hoisted) — значит, её можно вызвать ещё до того, как она написана в коде.</li>
+          <li>Объявлена в текущем скоупе и видна во всём его теле.</li>
+        </ul>
+        <pre><code>foo(); // Работает, несмотря на то, что вызов идёт до объявления
+
+function foo() {
+  console.log("Declaration");
+}</code></pre>
+        <br>
+        <p>Function Expression (Функциональное выражение)</p>
+        <ul>
+          <li>Функция создаётся как значение и присваивается переменной (const/let/var).</li>
+          <li>Не поднимается — вызвать её до присвоения нельзя</li>
+          <li>Обычно анонимная, но может иметь имя (редко нужно).</li>
+        </ul>
+        <pre><code>bar(); // Ошибка: bar is not a function
+
+const bar = function() {
+  console.log("Expression");
+};</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чем отличается цикл while от do...while?</legend>
+        <ul>
+          <li>* while проверяет условие сначала, и только потом выполняет тело.</li>
+          <li>* do...while сначала выполняет тело, а потом проверяет условие.</li>
+        </ul>
+        <br>
+        <pre><code>let i = 0;
+while (i > 0) {
+  console.log(i); // не выполнится
+  i--;
+}
+
+do {
+  console.log(i); // выполнится один раз
+  i--;
+} while (i > 0);</code></pre>
+      </fieldset>
+    </div>
+    
+    
+  </section>
+  <!-- <script src="script140525.js"></script>
+  <script src="script.js"></script>
+  <script src="160525.js"></script>
+  <script src="function-expression.js"></script> -->
+</body>
+</html>
