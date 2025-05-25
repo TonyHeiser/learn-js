@@ -1,1 +1,0 @@
-const res = (a, b) => a + b;
