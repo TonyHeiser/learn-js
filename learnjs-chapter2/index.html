@@ -136,7 +136,58 @@ null === undefined // false
 }</code></pre>
       </fieldset>
       <fieldset class="question">
-        legend
+        <legend>Правила хорошего стиля кода в JavaScript.</legend>
+        <ul>
+          <li>* Отступы — 2 пробела, не табы</li>
+          <li>* Фигурные скобки — всегда на той же строке, что и if, for и т.д.</li>
+          <li>* Не писать слишком длинные строки — максимум 80–120 символов</li>
+        </ul>
+      </fieldset>
+      <fieldset class="question">
+        <legend>[] + false - null + true = NaN</legend>
+        <pre><code>[] + false         → "" + "false"   → "false"
+"false" - null     → NaN - 0        → NaN
+NaN + true         → NaN + 1        → NaN</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>'use strict'</legend>
+        <p>Это директива, которая включает строгий режим в JavaScript. Он помогает ловить ошибки, избегать опасных конструкций и писать более предсказуемый код.</p>
+        <ul>
+          <li>1. Запрещает неявное объявление переменных</li>
+          <pre><code>"use strict";
+x = 5; // ❌ ReferenceError: x is not defined</code></pre>
+          <br>
+          <li>2. Запрещает дублирующиеся имена параметров</li>
+          <pre><code>"use strict";
+function f(a, a) {} // ❌ SyntaxError</code></pre>
+          <br>
+          <li>3. Запрещает удаление нестираемых свойств</li>
+          <pre><code>"use strict";
+delete Object.prototype; // ❌ TypeError</code></pre>
+          <br>
+          <li>4. this в функциях — не window, если не объект</li>
+          <pre><code>"use strict";
+function f() {
+  console.log(this); // undefined, а не window
+}</code></pre>
+          <br>
+          <li>5. Запрещены некоторые зарезервированные имена
+            Например: implements, interface, let, package, private, protected, public, static, yield.
+          </li>
+          <br>
+          <li>6. Нельзя присваивать значения eval и arguments</li>
+          <pre><code>"use strict";
+eval = 123;       // ❌ SyntaxError
+arguments = [];   // ❌ SyntaxError</code></pre>
+          <br>
+          <li>eval() не загрязняет внешний скоуп</li>
+          <pre><code>"use strict";
+eval("var x = 2");
+console.log(x); // ❌ ReferenceError: x is not defined</code></pre>
+          <br>
+          <li>8. Модульный код и классы ВСЕГДА работают в строгом режиме. Даже без 'use strict'.</li>
+        </ul>
+
       </fieldset>
     </div>
     <div class="questions__row row2">
@@ -219,6 +270,40 @@ const sayHi = function () {
   console.log("Привет");
 }</code></pre>
       </fieldset>
+      <fieldset class="question">
+        <legend>debugger</legend>
+        <p>Ставит breakpoint в коде</p>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чем отличается obj.key от obj["key"]?
+Когда нужно использовать квадратные скобки?</legend>
+        <p>obj.key — работает только с идентификаторами, то есть:</p>
+        <ul>
+          <li>без пробелов</li>
+          <li>не начинается с цифры</li>
+          <li>без спецсимволов</li>
+          <li><strong>Имя — жёстко зашито</strong></li>
+        </ul>
+        <br>
+        <p>obj["key"] — можно использовать:</p>
+        <ul>
+          <li>строку с чем угодно: "some key", "1", "ключ", и т.д.</li>
+          <li>переменную: let prop = "key"; obj[prop].</li>
+        </ul>
+        <br>
+        <pre><code>let user = { name: "Alex", "likes birds": true };
+let prop = "name";
+
+console.log(user.name);        // "Alex"
+console.log(user["likes birds"]); // true
+console.log(user[prop]);       // "Alex"</code></pre>
+        <br>
+        <p>Если нужно динамически — только [].</p>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Ключевое слово new в JavaScript пошагово</legend>
+        
+      </fieldset>
     </div>
     <div class="questions__row row3">
       <fieldset class="question">
@@ -299,6 +384,34 @@ do {
   console.log(i); // выполнится один раз
   i--;
 } while (i > 0);</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>null и undefined</legend>
+        <p>undefined — это отсутствие значения по умолчанию</p>
+        <pre><code>let a;
+console.log(a); // undefined</code></pre>
+        <br>
+        <p>null — это намеренное отсутствие значения</p>
+        <pre><code>let user = null; // Явно говорим: «нет пользователя»</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Переменная как имя свойства при создании объекта через {}</legend>
+        <p>через вычисляемое свойство (computed property)</p>
+        <pre><code>let fruit = "apple";
+let obj = {
+  [fruit]: 5
+};
+console.log(obj.apple); // 5</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Cокращённая запись свойств (Shorthand property names)</legend>
+        <pre><code>let name = "Alex";
+let age = 26;
+
+let user = {
+  name, // то же, что name: name
+  age   // то же, что age: age
+};</code></pre>
       </fieldset>
     </div>
     

@@ -9,15 +9,18 @@
 // });
 
 
-describe("pow", () => {
-  function makeTest(x) {
-    let expected = x * x * x;
-    it(`${x} в степени 3 будет ${expected}`, function() {
-      assert.equal(pow(x, 3), expected);
-    });
-  }
+// describe("pow", () => {
+//   function makeTest(x) {
+//     let expected = x * x * x;
+//     it(`${x} в степени 3 будет ${expected}`, function() {
+//       assert.equal(pow(x, 3), expected);
+//     });
+//   }
 
-  for (let x = 1; x <= 15; x++) {
-    makeTest(x);
-  }
-});
+//   for (let x = 1; x <= 15; x++) {
+//     makeTest(x);
+//   }
+// });
+
+
+console.log("aptAPT".slice(1));

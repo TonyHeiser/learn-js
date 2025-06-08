@@ -1,4 +1,3 @@
-
 const input1 = document.getElementById("input1");
 const input2 = document.getElementById("input2");
 const plus = document.getElementById("plus");
@@ -10,7 +9,7 @@ const output = document.getElementById("outputHere");
 // })
 
 plus.addEventListener("click", () => {
-  let answer = input1.value + Number(input2.value);
+  let answer = Number(input1.value) + Number(input2.value);
   output.style.display = "block";
   output.innerText = answer;
 })
