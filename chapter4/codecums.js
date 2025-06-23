@@ -94,3 +94,120 @@
 // console.log(neutralise("--++", "++++"));
 
 
+// let namae = {
+//   firstName: "Tiny",
+//   lastName: "Hzer",
+//   createFullName: () => {
+//     // return `${this.firstName} ${this.lastName}`
+//     return this.firstName + this.lastName
+//   }
+// }
+
+// let value = namae.createFullName();
+
+// console.log(value); // undefined undefined
+
+
+
+// let obj1 = {
+//   name: "Tiny",
+//   age: 27,
+//   isAdmin: false,
+//   parameters: {
+//     weight: 66,
+//     height: 168,
+//     health: {
+//       appendix: false,
+//       bloodType: "AB-"
+//     }
+//   }
+// }
+
+// let cloneObj1 = Object.assign({}, obj1);
+// let cloneParameters = Object.assign({}, obj1.parameters)
+// let obj2 = obj1
+// cloneObj1.parameters.health.bloodType = "O+";
+
+// console.log(obj1);
+// console.log("cloneObj1: ", cloneObj1, "\n");
+// console.log("cloneParameters: ", cloneParameters, "\n");
+// console.log("obj2: ", obj2);
+
+
+// function checkVowel(string, position) {
+//   return string[position] !== undefined ? "aeiouAEIOU".includes(string[position]) : false
+// };
+
+// console.log(checkVowel('cat', 1));
+// console.log(checkVowel('cat', 0));
+// console.log(checkVowel('cat', 4));
+// console.log(checkVowel('Amanda', -2));
+// console.log(checkVowel('Amanda', 0));
+// console.log(checkVowel('Amanda', 2));
+
+
+// function findArray(arr1, arr2) {
+//   if (arr1.length > 0 && arr2.length > 0) {
+//     let res = [];
+//     for (let i = 0; i < arr2.length; i++) {
+//       res.push(arr1[arr2[i]])
+//     }
+//     return res
+//   }
+//   return []
+// }
+
+// console.log("1: ", findArray([0, 1, 5, 2, 1, 8, 9, 1, 5], [1, 4, 7]));
+// console.log("2: ", findArray([1, 2, 3, 4, 5], [0]));
+// console.log("3: ", findArray([1, 2, 3, 4, 5], [4,2,0]));
+// console.log("4: ", findArray([1, 2, 3, 4, 5], [2,2,2]));
+// console.log("5: ", findArray(['this', 'is', 'test'], [0, 1, 2]));
+// console.log("5: ", findArray([], []));
+
+
+// function convertBits(a, b) {
+//   return (a ^ b).toString(2).split("").filter(e => e === "1").length;
+// }
+
+// console.log(convertBits(31, 14)); // 2
+
+
+// let myArray = ["1", "2", "3", "4", "5", "6", "7"];
+// let otherArray = ["a", "b", "c"]
+
+// function exchangeWith(a, b) {
+//   copyA = [...a];
+//   copyB = [...b];
+//   a = copyB.reverse();
+//   b = copyA.reverse();
+//   return;
+// }
+
+// exchangeWith(myArray, otherArray);
+
+// console.log(myArray);
+// console.log(otherArray);
+
+
+var list = [
+  { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
+  { firstName: 'Nor', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' }
+];
+
+let herry = [ { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 19, language: 'Python', username: 'harryk2015' } ]
+
+function addProperty(list) {
+  for (let i in list) {
+    list[i].username = list[i].firstName.toLowerCase() + list[i].lastName[0].toLowerCase() + (new Date().getFullYear() - list[i].age);
+  }
+}
+
+addProperty(herry)
+
+console.log(herry);
+
+// let someData = { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' };
+// someData.username = `${(this.firstName).toLowerCase()}${this.lastName}${new Date().getFullYear() - age}`
+// someData.username = (someData.firstName).toLowerCase() + (someData.lastName[0]).toLowerCase() + (new Date().getFullYear() - someData.age)
+
+
