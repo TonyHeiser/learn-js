@@ -189,25 +189,41 @@
 // console.log(otherArray);
 
 
-var list = [
-  { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
-  { firstName: 'Nor', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' }
-];
+// var list = [
+//   { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' },
+//   { firstName: 'Nor', lastName: 'E.', country: 'Malaysia', continent: 'Asia', age: 20, language: 'Clojure' }
+// ];
 
-let herry = [ { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 19, language: 'Python', username: 'harryk2015' } ]
+// let herry = [ { firstName: 'Harry', lastName: 'K.', country: 'Brazil', continent: 'Americas', age: 19, language: 'Python', username: 'harryk2015' } ]
 
-function addProperty(list) {
-  for (let i in list) {
-    list[i].username = list[i].firstName.toLowerCase() + list[i].lastName[0].toLowerCase() + (new Date().getFullYear() - list[i].age);
-  }
-}
+// function addProperty(list) {
+//   for (let i in list) {
+//     list[i].username = list[i].firstName.toLowerCase() + list[i].lastName[0].toLowerCase() + (new Date().getFullYear() - list[i].age);
+//   }
+// }
 
-addProperty(herry)
+// addProperty(herry)
 
-console.log(herry);
+// console.log(herry);
 
 // let someData = { firstName: 'Emily', lastName: 'N.', country: 'Ireland', continent: 'Europe', age: 30, language: 'Ruby' };
 // someData.username = `${(this.firstName).toLowerCase()}${this.lastName}${new Date().getFullYear() - age}`
 // someData.username = (someData.firstName).toLowerCase() + (someData.lastName[0]).toLowerCase() + (new Date().getFullYear() - someData.age)
 
 
+
+function twiceAsOld(dadYearsOld, sonYearsOld) {
+  let count = 0;
+  while (sonYearsOld !== dadYearsOld / 2) {
+    dadYearsOld++;
+    sonYearsOld++
+    count++
+  }
+  return count
+}
+
+console.log(twiceAsOld(36,7));
+console.log(twiceAsOld(55,30));
+console.log(twiceAsOld(42,21));
+console.log(twiceAsOld(22,1));
+console.log(twiceAsOld(29,0));

@@ -189,6 +189,42 @@ console.log(x); // ❌ ReferenceError: x is not defined</code></pre>
         </ul>
 
       </fieldset>
+      <fieldset class="question">
+        <legend>this.property</legend>
+        <p>this зависит от способа вызова, а не от места, где метод объявлен.</p>
+        <br>
+        <pre><code>function sayHi() {
+  console.log(this.name);
+}
+
+let user = {
+  name: "Alice",
+  greet: sayHi
+};
+
+let admin = {
+  name: "Bob",
+  greet: sayHi
+};
+
+sayHi();           // undefined (или window.name в нестрогом режиме)
+user.greet();      // "Alice"
+admin.greet();     // "Bob"</code></pre>
+        <ul>
+          <li>
+          Функция sayHi была объявлена одна и та же.
+          </li>
+          <li>
+            Но this каждый раз разный:
+            <ul>
+              <li>* sayHi() без объекта → this = undefined (в strict mode).</li>
+              <li>* user.greet() → this = user.</li>
+              <li>* admin.greet() → this = admin</li>
+            </ul>
+          </li>
+        </ul>
+        <br><p>this определяется в момент вызова — через какой объект вызвали, к тому и будет привязан this.</p>
+      </fieldset>
     </div>
     <div class="questions__row row2">
       <fieldset>
@@ -302,7 +338,41 @@ console.log(user[prop]);       // "Alex"</code></pre>
       </fieldset>
       <fieldset class="question">
         <legend>Ключевое слово new в JavaScript пошагово</legend>
-        
+        <ul>
+          <li>1. Создаётся новый пустой объект: {}.</li>
+          <li>2. Внутренний [[Prototype]] этого объекта устанавливается в Constructor.prototype.</li>
+          <li>3. Внутри конструктора this ссылается на этот новый объект.</li>
+          <li>4. Выполняется код конструктора.</li>
+          <li>5. Если конструктор явно вернул объект — возвращается он; если нет — возвращается this.</li>
+        </ul>
+        <pre><code>
+function User(name) {
+  this.name = name;
+}
+const u = new User("John");
+        </code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Метод одного объекта в другой. </legend>
+        <p>Если просто скопировать метод из одного объекта в другой, this начнёт указывать на новый объект, откуда он был вызван. Главное — this всегда определяется в момент вызова, а не в момент копирования.</p>
+        <pre><code>let user = {
+  name: "Alice",
+  sayHi() {
+    console.log(this.name);
+  }
+};
+
+let admin = {
+  name: "Bob"
+};
+
+// копируем метод
+admin.sayHi = user.sayHi;
+
+admin.sayHi(); // "Bob" — this указывает на admin</code></pre>
+        <br>
+        <p>навсегда зафиксировать this — используют .bind():</p>
+        <pre><code>let bound = user.sayHi.bind(user); // this всегда user</code></pre>
       </fieldset>
     </div>
     <div class="questions__row row3">
@@ -412,6 +482,74 @@ let user = {
   name, // то же, что name: name
   age   // то же, что age: age
 };</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Symbol в JavaScript</legend>
+        <p>Symbol — это примитивный тип данных, который создаёт уникальные идентификаторы. Даже если вы создадите Symbol("id") дважды, они будут разными.</p>
+        <ul>
+          <li>1. Скрытые свойства объектов — чтобы добавить "приватное" свойство, не конфликтующее с другими:</li>
+          <pre><code>const id = Symbol("id");
+obj[id] = 123;</code></pre>
+          <br>
+          <li>2. Переопределение поведения встроенных операций — через well-known symbols, например:
+            <ul>
+              <li>
+                Symbol.iterator — делает объект итерируемым.
+              </li>
+              <li>
+                Symbol.toPrimitive — управляет преобразованием объекта в примитив.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </fieldset>
+      <fieldset class="question">
+        <legend>разница между Object.assign и spread-оператором {...obj}</legend>
+        <p>Различия</p>
+        <br>
+        <ul>
+          <li>1. Наследуемые свойства:
+            <ul>
+              <li>
+                * Object.assign копирует все перечислимые собственные свойства (не унаследованные).
+              </li>
+              <li>
+                * {...obj} — только собственные перечислимые свойства, но не копирует геттеры/сеттеры как функции, а только их результат.
+              </li>
+            </ul>
+            <pre><code>let source = {
+  get value() { return 42; }
+};
+
+let a = Object.assign({}, source);
+let b = { ...source };
+
+console.log(Object.getOwnPropertyDescriptor(a, 'value').get); // [Function: get value]
+console.log(Object.getOwnPropertyDescriptor(b, 'value').get); // undefined</code></pre>
+          </li>
+          <br>
+          <li>2. Прототип:
+            <ul>
+              <li>
+                * Object.assign может использоваться для копирования в уже существующий объект, включая например Object.create(null).
+              </li>
+              <li>
+                * Spread — всегда создаёт новый объект с Object.prototype.
+              </li>
+            </ul>
+          </li>
+          <br>
+          <li>3. Поведение с Symbol-свойствами:
+            <ul>
+              <li>
+                * Object.assign копирует все перечислимые символ-свойства.
+              </li>
+              <li>
+                * Spread их игнорирует.
+              </li>
+            </ul>
+          </li>
+        </ul>
       </fieldset>
     </div>
     
