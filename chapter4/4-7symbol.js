@@ -95,7 +95,6 @@ function keyRof() {
   console.log(Symbol.keyFor(sym2), "\n");
 }
 
-keyRof();
 
 
 function getAllKeysEvenSymbols() {
