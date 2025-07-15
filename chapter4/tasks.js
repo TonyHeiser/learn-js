@@ -108,12 +108,6 @@ function whoHasTheMostMoney() {
     }
   }
 
-  // let students = [andy, stephen, eric, david, phil]
-
-  // function mostMoney(students) {
-
-  // }
-
   const andy = new Student("Andy", 0, 0, 2);
   const stephen = new Student("Stephen", 0, 4, 0);
   const eric = new Student("Eric", 8, 1, 0);

@@ -1,0 +1,19 @@
+{
+  "name": "cbwt",
+  "version": "1.0.0",
+  "description": "codewars with mocha-tests",
+  "keywords": [
+    "codewars",
+    "mocha-tests"
+  ],
+  "license": "MIT",
+  "author": "TinyHzer",
+  "type": "module",
+  "main": "script.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "mocha": "^11.5.0"
+  }
+}
