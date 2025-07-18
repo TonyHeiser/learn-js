@@ -27,13 +27,19 @@
     }
 
     .row {
-
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     fieldset.question {
       max-width: 480px;
       padding: 20px;
       border-radius: 5px;
+    }
+
+    fieldset.fieldset__answer {
+      background-color: #00a8ff;
     }
     
     legend {
@@ -44,39 +50,206 @@
       border-radius: 5px;
       padding: 5px 10px;
     }
+    
+
+    /* .answer {
+      background-color: #00a8ff;
+      border-radius: 5px;
+      padding: 10px;
+    } */
 
     p {
-      color: #00a8ff;
+      color: #1e272e;
       font-weight: 600;
+    }
+
+    p.white {
+      color: #f5f6fa;
+    }
+
+    code {
+      color: #4cd137;
+      font-size: 16px;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
   <main>
     <div class="row row1">
-      <fieldset class="question">
+      <fieldset class="question fieldset__answer">
         <legend>Что такое this?</legend>
-        <p>this — это ссылка на какой-то объект.</p>
+        
+        <div class="answer">
+          <p>this — это ссылка на какой-то объект.</p>
+          <br>
+          <p>this в JavaScript — это контекст вызова, то есть объект, к которому относится текущий код во время исполнения.</p>
+          <br>
+          <p>this в JavaScript — это ссылка на объект, в контексте которого была вызвана функция.</p>
+          <br>
+          <p>Значение this не определяется во время объявления функции, а только в момент её вызова. Его поведение зависит от способа вызова и режима (обычный или strict).</p>
+          <br>
+          <p>this — это динамически определяемая ссылка на объект, в контексте которого выполняется функция. В обычной функции зависит от способа вызова, в стрелочной — лексически унаследовано. На практике this особенно важно контролировать в методах объектов, callback'ах и при работе с class</p>
+        </div>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чему равен this в свойствах объекта?</legend>
+        <p class="white">this в свойствах объекта (при его создании) не ссылается на сам объект, а берёт значение из внешнего контекста исполнения.</p>
+        <pre><code>let apt = {
+  address: "431 Pierson St.",
+  whatIsThat: this, // <ref *1> Object [global] {...}
+  subApt: {
+    aptNumber: 2003,
+    thisInSubApt: this, // <ref *1> Object [global] {...}
+    doubleSubApt: {
+      rooms: 3,
+      bathrooms: 1,
+      thisInDoubleSubApt: this, // <ref *1> Object [global] {...}
+    }
+  }
+}
+        </code></pre>
         <br>
-        <p>this в JavaScript — это контекст вызова, то есть объект, к которому относится текущий код во время исполнения.</p>
-        <br>
-        <p>this в JavaScript — это ссылка на объект, в контексте которого была вызвана функция.</p>
-        <br>
-        <p>Значение this не определяется во время объявления функции, а только в момент её вызова. Его поведение зависит от способа вызова и режима (обычный или strict).</p>
-        <br>
-        <p>this — это динамически определяемая ссылка на объект, в контексте которого выполняется функция. В обычной функции зависит от способа вызова, в стрелочной — лексически унаследовано. На практике this особенно важно контролировать в методах объектов, callback'ах и при работе с class</p>
+        <pre><code>let person = {
+  name: "TinyHzer",
+
+  defineThis() {
+    console.log(this); // {name: 'TinyHzer', ... }
+  },
+
+  defineThisArrow: () => {
+    console.log(this); // <ref *1> Object [global] {...}
+  },
+
+  parameters: {
+    age: 27,
+
+    defineThis() {
+      console.log(this); // {age: 27, ... }
+    },
+
+    defineThisArrow: () => {
+      console.log(this); // <ref *1> Object [global] {...}
+    },
+    
+    health: {
+      bloodType: "AB-",
+
+      defineThis() {
+        console.log(this); // {bloodType: 'AB-', ... }
+      },
+
+      defineThisArrow: () => {
+        console.log(this); // <ref *1> Object [global] {...}
+      }
+    }
+  }
+}</code></pre>
       </fieldset>
     </div>
     <div class="row row2">
       <fieldset class="question">
         <legend>Как потерять this?</legend>
-        <p></p>
+        <pre><code>let user = {
+  name: "John",
+  sayHi() {
+    alert(this.name);
+  }
+};
+
+let f = user.sayHi;
+f(); // undefined</code></pre>
+        <br>
+        <br>
+        <pre><code>function invokeCallback(cb) { // здесь мы «декларируем» параметр cb
+  cb(); // а здесь — вызываем его как функцию
+}
+
+let user = {
+  name: "Вася",
+  sayHi() {
+    console.log(this.name);
+  }
+};
+
+invokeCallback(user.sayHi);// передали метод как колбэк → потеряли this → undefined</code></pre>
+      </fieldset>
+      <fieldset class="question fieldset__answer">
+        <legend>Чему равен this в геттерах/сеттерах объекта?</legend>
+        <p>getters & setters - функции и каких-то явных особенностей поведения this в них нет</p>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Чему равен this внутри функции-стрелки?</legend>
+        <p class="white">наследует this из внешнего лексического окружения</p>
+        <br>
+        <p class="white">оно захватывается (лексически) из окружения, где стрелка была определена, а не вызвана</p>
+        <br>
+        <p class="white">this внутри стрелки = this внешней функции/контекста, где она была создана.</p>
+        <pre><code>let obj = {
+  id: 42,
+  regular() {
+    let arrow = () => console.log(this.id);
+    arrow();
+  }
+};
+obj.regular(); // 42
+// → стрелка унаследовала this = obj из метода regular</code></pre>
+        <br>
+        <pre><code>function foo() {
+  this.value = 7;
+  let arrow = () => console.log(this.value);
+  arrow();
+}
+foo.call({ value: 99 }); // 99
+// → стрелка захватила this = { value: 99 }</code></pre>
       </fieldset>
     </div>
     <div class="row row3">
       <fieldset class="question">
         <legend>Как не терять this?</legend>
-        <p></p>
+        <p class="white">1. .bind() Привязывает this жёстко к объекту:</p>
+        <pre><code>let f = user.sayHi.bind(user);
+f(); // this === user</code></pre>
+        <br>
+        <p class="white">2. Обёртка-стрелка – берёт this из лексического окружения</p>
+        <p class="white">Стрелочные функции не имеют своего this, поэтому он захватывается из внешнего скоупа:</p>
+        <pre><code>let user = {
+  name: "Вася",
+  sayHi() {
+    console.log(this.name);
+  }
+};
+
+function invoke(cb) {
+  cb(); // простой вызов, без привязки
+}
+
+invoke(() => user.sayHi()); // Вася</code></pre>
+        <br>
+        <p class="white">3. call / apply – однократный вызов с явной передачей this</p>
+        <p class="white">Если вы контролируете место вызова, можно прямо передать контекст:</p>
+        <pre><code>let user = { name: "Вася", sayHi() { console.log(this.name); } };
+
+// внутри другой функции:
+function exec(callback) {
+  // вместо callback(), делаем:
+  callback.call(user);    // <- this = user
+}
+
+exec(user.sayHi); // Вася</code></pre>
+        <br>
+        <p class="white">4. Методы‑стрелки в классах или в литеральном объекте (через class‑fields)</p>
+        <p class="white">При объявлении метода как стрелочного поля он «навсегда» привязан к экземпляру:</p>
+        <pre><code>class User {
+  name = "Вася";
+  sayHi = () => {
+    console.log(this.name);
+  }
+}
+
+let u = new User();
+let fn = u.sayHi;
+fn(); // Вася</code></pre>
       </fieldset>
     </div>
   </main>

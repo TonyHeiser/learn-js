@@ -117,13 +117,14 @@ function whoHasTheMostMoney() {
   const geoff = new Student("Geoff", 0, 3, 0);
 
   let listOfInstances = Student.getAll();
-
   let maxMoneys = listOfInstances.map(e => e.allMoney).sort((a, b) => b - a)[0];
-
   let maxName = listOfInstances.filter(e => e.allMoney === maxMoneys);
 
   console.log(maxName);
   
 }
 
-whoHasTheMostMoney();
+// whoHasTheMostMoney();
+
+
+console.log(Number.MAX_VALUE);

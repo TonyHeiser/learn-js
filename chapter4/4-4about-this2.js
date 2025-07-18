@@ -205,7 +205,7 @@ function imTiredOfThis4() {
   user.declareFunc(); // this === user
 }
 
-imTiredOfThis4();
+// imTiredOfThis4();
 
 
 function imTiredOfThis3() {
@@ -213,46 +213,47 @@ function imTiredOfThis3() {
     name: "TinyHzer",
 
     defineThis() {
-      console.log(this);
+      console.log(this); // {name: 'TinyHzer', ... }
     },
 
     defineThisArrow: () => {
-      console.log(this);
+      console.log(this); // <ref *1> Object [global] {...}
     },
 
     parameters: {
       age: 27,
 
       defineThis() {
-        console.log(this);
+        console.log(this); // {age: 27, ... }
       },
 
       defineThisArrow: () => {
-        console.log(this);
+        console.log(this); // <ref *1> Object [global] {...}
       },
       
       health: {
         bloodType: "AB-",
 
         defineThis() {
-          console.log(this);
+          console.log(this); // {bloodType: 'AB-', ... }
         },
 
         defineThisArrow: () => {
-          console.log(this);
+          console.log(this); // <ref *1> Object [global] {...}
         }
       }
     }
   }
 
+  person.parameters.health.defineThisArrow();
+
   // person.defineThisArrow();
   // person.parameters.defineThis();
   // person.parameters.defineThis() === person.parameters; // true
   // person.parameters.defineThisArrow() === person.parameters.health.defineThisArrow(); // true
-  person.parameters.health.defineThisArrow(); // <ref *1> Object [global] {...}
 }
 
-// console.log("Are they Equal: ", imTiredOfThis3() === imTiredOfThis2()); // true
+imTiredOfThis3();
 
 
 function funcArrow() {
@@ -269,3 +270,5 @@ function funcArrow() {
 
   user.getFirstProperty(); // Nuts
 }
+
+

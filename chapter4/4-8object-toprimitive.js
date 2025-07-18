@@ -104,4 +104,32 @@ function chameleon() {
   
 }
 
-chameleon()
+// chameleon()
+
+
+function contain() {
+  let obj = {};
+  console.log(String(obj)); // [object Object]
+  console.log(obj.valueOf()); // {}
+}
+
+
+function contain2() {
+  let obj = {
+    strVal: "manhattan ave",
+    numero: 40,
+    isCapital: false,
+    toString() {
+      return this.strVal
+    },
+    valueOf() {
+      return this.numero
+    }
+  }
+
+  console.log(String(obj)); // manhattan ave
+  console.log(obj + 2); // 42
+  console.log(Boolean(obj)); 
+}
+
+contain2();
