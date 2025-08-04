@@ -111,6 +111,10 @@ class Scums {
   static extraCurrencyValue(str) {
     return Number(str.slice(1));
   }
+
+  static showFunctionRes(str) {
+    console.log(this.extraCurrencyValue(str));
+  }
 }
 
-console.log(Scums.extraCurrencyValue("$120"));
+Scums.showFunctionRes("$232");
