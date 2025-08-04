@@ -146,6 +146,23 @@
   }
 }</code></pre>
       </fieldset>
+      <fieldset class="question">
+        <legend>String(obj < 0) + String(obj < 0) // "truefalse". Как это сделать?</legend>
+        <pre><code>let obj = {
+  state: 0,
+  [Symbol.toPrimitive]() {
+    if (this.state === 0) {
+      this.state++;
+      return -1;
+    } else {
+      this.state--;
+      return 1;
+    }
+  }
+}
+
+console.log(String(obj < 0) + String(obj < 0)); // truefalse</code></pre>
+      </fieldset>
     </div>
     <div class="row row2">
       <fieldset class="question">
@@ -203,6 +220,37 @@ obj.regular(); // 42
 foo.call({ value: 99 }); // 99
 // → стрелка захватила this = { value: 99 }</code></pre>
       </fieldset>
+      <fieldset class="question">
+        <legend>obj > 0 // true. Как это сделать?</legend>
+        <p class="white">Операторы сравнения (>, <, <=, >=) всегда используют хинт "number", и пытаются получить число из объекта.</p>
+        <pre><code>const obj = {
+  [Symbol.toPrimitive](hint) {
+    return hint === "number" ? 1 : "ignored";
+  }
+};
+
+console.log(obj > 0); // true</code></pre><br>
+        <pre><code>const obj = {
+  valueOf() {
+    return 1;
+  }
+};
+
+console.log(obj > 0); // true</code></pre>
+
+      </fieldset>
+      <fieldset class="question">
+        <legend>Что происходит внутри при вызове функции-конструктора с new?</legend>
+        <pre><code>function User(name) {
+  // this = {};  (неявно)
+
+  // добавляет свойства к this
+  this.name = name;
+  this.isAdmin = false;
+
+  // return this;  (неявно)
+}</code></pre>
+      </fieldset>
     </div>
     <div class="row row3">
       <fieldset class="question">
@@ -250,6 +298,47 @@ exec(user.sayHi); // Вася</code></pre>
 let u = new User();
 let fn = u.sayHi;
 fn(); // Вася</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Как сделать, чтобы объект был равен определенному числу?</legend>
+        <pre><code>const obj = {
+  [Symbol.toPrimitive]() {
+    return 123;
+  }
+};
+
+console.log(obj == 123); // true</code></pre>
+        <br>
+        <pre><code>const obj = {
+  valueOf() {
+    return 123;
+  }
+};
+
+console.log(obj == 123); // true</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Как сделать, чтобы объект был равен определенной строке?</legend>
+        <pre><code>const obj = {
+  toString() {
+    return "hello";
+  }
+};
+
+console.log(obj == "hello"); // true</code></pre><br>
+        <pre><code>const obj = {
+  [Symbol.toPrimitive](hint) {
+    return hint === "string" || hint === "default" ? "hello" : 0;
+  }
+};
+
+console.log(obj == "hello"); // true</code></pre>
+      </fieldset>
+      <fieldset class="question">
+        <legend>Можно ли вызвать конструктор без new? Что будет?</legend>
+        <p class="white">Если вызвать конструктор без new, то внутри функции this будет:</p>
+        <p class="white">1. В строгом режиме ('use strict') — undefined, что обычно приводит к ошибке при попытке обратиться к свойствам this.</p>
+        <p class="white">2. В нестрогом режиме — this будет указывать на глобальный объект (window в браузере), и свойства будут добавлены туда — что почти всегда баг.</p>
       </fieldset>
     </div>
   </main>

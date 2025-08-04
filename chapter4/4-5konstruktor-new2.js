@@ -90,3 +90,16 @@ function arrowsInKonstruktors() {
 }
 
 // arrowsInKonstruktors();
+
+
+function withoutNew() {
+  function Konstrukter(name, age) {
+    this.name = name;
+    this.age = age
+  }
+
+  let dude = Konstrukter("Jim", 27);
+  console.log(dude);
+}
+
+withoutNew();

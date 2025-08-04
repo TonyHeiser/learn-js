@@ -132,4 +132,27 @@ function contain2() {
   console.log(Boolean(obj)); 
 }
 
-contain2();
+// contain2();
+
+
+function objLessThan0() {
+  let obj = {
+    state: 0,
+    [Symbol.toPrimitive]() {
+      if (this.state === 0) {
+        this.state++;
+        return -1;
+      } else {
+        this.state--;
+        return 1;
+      }
+    }
+  }
+
+  console.log(String(obj < 0) + String(obj < 0)); // truefalse
+  
+}
+
+objLessThan0();
+
+
