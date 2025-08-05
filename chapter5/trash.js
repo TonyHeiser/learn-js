@@ -34,4 +34,4 @@ class JennyTheYoungestDetective {
   }
 }
 
-JennyTheYoungestDetective.logOutput
+// JennyTheYoungestDetective.logOutput
