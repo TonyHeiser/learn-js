@@ -188,4 +188,27 @@ function task4() {
   console.log(sumInput());
 }
 
-task4();
+// task4();
+
+
+function task5() {
+  function sumInput() {
+    let numbers = [];
+    while (true) {
+      let value = prompt("Enter a number", 0);
+      if (value === "" || value === null || !isFinite(value)) break;
+      numbers.push(+value);
+    }
+
+    let sum = 0;
+    for (let number of numbers) {
+      sum += number;
+    }
+
+    return sum
+  }
+
+  alert(sumInput());
+}
+
+task5();

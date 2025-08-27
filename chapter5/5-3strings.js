@@ -117,4 +117,38 @@ class Scums {
   }
 }
 
-Scums.showFunctionRes("$232");
+// Scums.showFunctionRes("$232");
+
+
+class AllMethods {
+  static StaticMethods = class {
+    static fromCharCodeEx = () => console.log(String.fromCharCode(189, 43, 190, 61)); // ½+¾=
+    static fromCodePointEx = () => console.log(String.fromCodePoint(9731, 9733, 9842, 0x2f804)); // ☃★♲你
+    static rawEx = () => console.log(String.raw`^\d+\.\d{2}$`); // ^\d+\.\d{2}$
+  }
+
+  static InstanceMethods = class {
+    static concatEx = () => {
+      const str1 = "Hello";
+      const str2 = "World";
+      console.log(str1.concat(" ", str2)); // Hello World
+      console.log(str2.concat(" ", str1)); // World Hello
+    };
+    
+    static endsWithEx() {
+      const str1 = "Cats are the best!";
+      console.log(str1.endsWith("best!")); // true
+      console.log(str1.endsWith("best", 17)); // true
+      console.log(str1.endsWith("west")); // false
+    }
+
+    static lastIndexOfEx() {
+      const paragraph = "I think Ruth's dog is cuter than your dog!";
+      const searchItem = "dog";
+      console.log(`Index of the last ${searchItem} is ${paragraph.lastIndexOf(searchItem)}`); // Index of the last dog is 38
+    }
+  }
+}
+
+// AllMethods.InstanceMethods.lastIndexOfEx();
+

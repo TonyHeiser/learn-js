@@ -5,8 +5,7 @@ function canWeAddaProperty() {
   str.test = 5;
   //В строгом режиме, попытка изменения этого объекта выдаёт ошибку.
 
-  console.log(str.test, str); // undefined, Halyo
+  console.log(str.test, str); // undefined, Halyo `TypeError`
   //Без строгого режима, операция продолжается, объект получает свойство test, но после этого он удаляется, так что на последней линии str больше не имеет свойства test.
 
 }
-

@@ -106,7 +106,7 @@ function roundingNums2() {
 
 
 function maximus() {
-  console.log(Number.MAX_SAFE_INTEGER); // 9007199254740991
+  console.log(Number.MAX_SAFE_INTEGER); // 9_007_199_254_740_991
   console.log(Number.MIN_SAFE_INTEGER); // -9007199254740991
   console.log(9007199254740991 + 1); // 9007199254740992
   console.log(9007199254740991 + 2); // 9007199254740992
