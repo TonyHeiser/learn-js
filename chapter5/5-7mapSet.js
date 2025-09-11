@@ -1,10 +1,13 @@
-/**new Map()            - create collection
+/**Map – это коллекция ключ/значение, как и Object. Но основное отличие в том, что Map позволяет использовать ключи любого типа.
+ * new Map()            - create collection
  * map.set(key, value)
  * map.get(key)         - value or undefined
  * map.has(key)         - boolean
  * map.delete(key)
  * map.clear()          - clear collection
  * map.size             - same shit like length
+ * map.keys()
+ * map.values()
  */
 /**Map сохраняет тип ключей */
 
@@ -208,9 +211,24 @@ class Task {
   static arr = [ "nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares" ];
 
   static filterAnagrams(arr) {
-    let sorted = arr.map(e => e.split("").sort().join(""));
-    return JSON.stringify(sorted);
+    let mapObj = new Map();
+
+    for (let i of arr) {
+      let sorted = i.toLowerCase().split("").sort().join("");
+      mapObj.set(sorted, i);
+    }
+
+    return [...mapObj.values()]
+  }
+
+  static solveProblem() {
+    let map = new Map();
+    map.set("Name", "Michael");
+    // let keys = map.keys(); // [Map Iterator] { 'Name' }
+    let keys = [...map.keys()];
+    keys.push("more");
+    return [map, keys];
   }
 }
 
-console.log(Task.filterAnagrams(Task.arr));
+console.log(Task.solveProblem());
