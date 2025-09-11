@@ -127,7 +127,7 @@ class ArraySearchers {
   }
 }
 
-// ArraySearchers.filtar();
+ArraySearchers.filtar();
 
 
 class TransformArr {
@@ -220,6 +220,24 @@ class TransformArr {
   }
 }
 
-TransformArr.isThisanArray();
+// TransformArr.isThisanArray();
 
 
+class ExtraMethods {
+  static fillCopyWithin() {
+    let arreu = [1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
+    arreu.fill(89, 4, 7); // MUTABLE
+    arreu.fill([89, 23, 100, 44], 4, 5); // MUTABLE
+    console.log(arreu); // [ 1, 10, 2, 9, [ 89, 23, 100, 44 ], 89, 89, 7, 5, 6 ]
+
+    let arrue = [10, 1, 9, 2, 8, 3, 7, 4, 6, 5];
+    let arrueCopy = arrue.copyWithin(0, 4, 7);
+    console.log(arrueCopy, arrue);
+    
+  }
+}
+
+ExtraMethods.fillCopyWithin();
+
+
+[0, NaN].indexOf(NaN);

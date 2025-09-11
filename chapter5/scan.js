@@ -394,4 +394,62 @@ class RotateArray {
   }
 }
 
-RotateArray.tests();
+// RotateArray.tests();
+
+
+const books = [
+  { title: "Преступление и наказание", author: "Достоевский", year: 1866, genre: "роман" },
+  { title: "1984", author: "Оруэлл", year: 1949, genre: "антиутопия" },
+  { title: "Мастер и Маргарита", author: "Булгаков", year: 1967, genre: "роман" },
+  { title: "Гарри Поттер и философский камень", author: "Роулинг", year: 1997, genre: "фэнтези" },
+  { title: "Тёмные начала", author: "Пулман", year: 1995, genre: "фэнтези" },
+  { title: "Мы", author: "Замятин", year: 1924, genre: "антиутопия" }
+];
+
+
+function returnJenres(books) {
+  let genres = books.map(e => e.genre);
+  let res = {};
+  for (let i = 0; i < genres.length; i++) {
+    res[genres[i]] = genres.filter(e => e == genres[i]).length;
+  }
+  return res
+}
+
+// console.log(returnJenres(books));
+
+
+
+const products = [
+  { id: 1, name: "Ноутбук", category: "электроника", price: 50000, inStock: true },
+  { id: 2, name: "Мышка", category: "электроника", price: 2500, inStock: false },
+  { id: 3, name: "Клавиатура", category: "электроника", price: 3500, inStock: true },
+  { id: 4, name: "Стул", category: "мебель", price: 8000, inStock: true },
+  { id: 5, name: "Стол", category: "мебель", price: 15000, inStock: false },
+  { id: 6, name: "Коврик", category: "аксессуары", price: 1500, inStock: true }
+];
+
+function getNotInStock(products) {
+  return products.filter(e => e.inStock === false).map(e => e.name);
+}
+
+function sortStuff(products) {
+  return products.sort((a, b) => b.price - a.price);
+}
+
+function structureStuff(product) {
+  let categories = product.map(e => e.category).filter((e, i, arr) => arr.indexOf(e) === i);
+  let res = {};
+  for (let i = 0; i < categories.length; i++) {
+    res[categories[i]] = product.filter(e => e.category == categories[i]);
+  }
+
+  return res
+}
+
+// console.log(structureStuff(products));
+
+// console.log(sortStuff(products));
+
+
+console.log(1550 * 15 / 2 * 12 / 79);
