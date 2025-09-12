@@ -452,4 +452,64 @@ function structureStuff(product) {
 // console.log(sortStuff(products));
 
 
-console.log(1550 * 15 / 2 * 12 / 79);
+// console.log(1550 * 15 / 2 * 12 / 79);
+
+
+/*********************************************************** */
+
+// https://www.codewars.com/kata/598638d7f3a2c489b2000030
+function getRoot(objekt, val) {
+  for (let i in objekt) {
+    if (typeof objekt[i] == "object") {
+      if (getRoot(objekt[i], val)) {
+        return i;
+      }
+    } else {
+      if (objekt[i] == val){
+        return i;
+      }
+    }
+  };
+  return null;
+}
+
+const obj = {
+  "one": {
+    "nest1": {
+      "val1": [9, 34, 92, 100]
+    }
+  },
+
+  "2f7": {
+    "n1": [10, 92, 53, 71],
+    "n2": [82, 34, 6, 19]
+  }
+}
+
+// console.log(getRoot(obj, 9));
+
+
+// https://www.codewars.com/kata/59c3e819d751df54e9000098
+class ConsecutiveCount {
+  static method(data, element) {
+    [data, element] = [String(data), String(element)];
+    let max = 0, current = 0;
+    for (let i of data) {
+      current = i == element ? current + 1 : 0;
+      if (current > max) {
+        max = current;
+      }
+    }
+
+    return max;
+  }
+
+  static tests() {
+    console.log(this.method(90000, 0));
+  }
+}
+
+// ConsecutiveCount.tests();
+
+
+
