@@ -97,7 +97,7 @@ class DeluluMemory {
   }
 }
 
-// DeluluMemory.createMap();
+DeluluMemory.funky();
 
 
 class IterateMaps {
@@ -234,4 +234,7 @@ class Task {
   }
 }
 
-console.log(Task.solveProblem());
+// console.log(Task.solveProblem());
+
+
+// New Set Methods

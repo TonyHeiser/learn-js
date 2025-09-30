@@ -235,9 +235,23 @@ function randomObjekt() {
     hasLight: true,
 
     [Symbol.iterator]() {
-
+      const values = Object.entries(this);
+      let i = 0;
+      return {
+        next() {
+          if (i < values.length) return {value: values[i++], done: false};
+          else return {done: true};
+        }
+      }
     }
+  };
+
+  for (let v of apt) {
+    console.log(v); // [ 'numOfApt', 304 ], [ 'rooms', 3 ], [ 'bathrooms', 2 ], [ 'hasLight', true ]
   }
+
+  let iter = [][Symbol.iterator]();
+  console.log(iter.next()); // {value: undefined, done: true}
 }
 
 randomObjekt();

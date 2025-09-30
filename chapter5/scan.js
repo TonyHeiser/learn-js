@@ -452,9 +452,6 @@ function structureStuff(product) {
 // console.log(sortStuff(products));
 
 
-// console.log(1550 * 15 / 2 * 12 / 79);
-
-
 /*********************************************************** */
 
 // https://www.codewars.com/kata/598638d7f3a2c489b2000030
@@ -512,5 +509,3 @@ class ConsecutiveCount {
 // ConsecutiveCount.tests();
 
 
-
-\
